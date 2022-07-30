@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "521169099255",
+    "project_id": "sbtanew",
+    "storage_bucket": "sbtanew.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521169099255:android:c6bea98e61431eb8c3f6f2",
+        "android_client_info": {
+          "package_name": "com.example.sbtanew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "521169099255-fv1t6jthoguh8c5ihdjfkdf3980eq9a0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtjh36OomJNSMC5dxUazNIuFfzbIntNpE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "521169099255-fv1t6jthoguh8c5ihdjfkdf3980eq9a0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

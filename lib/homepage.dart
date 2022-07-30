@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sbtanew/screens/loginscreen.dart';
+import 'package:sbtanew/screens/splashscreen.dart';
 class SbtaHomePage extends StatelessWidget {
   const SbtaHomePage({Key? key}) : super(key: key);
 
@@ -9,9 +10,8 @@ class SbtaHomePage extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.red),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body:SingleChildScrollView(
-        child: LoginScreen(),
-        ),
+        body:SplashScreen(),//LoginScreen(),
+
       ),
     );
   }
