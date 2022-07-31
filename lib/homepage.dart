@@ -9,7 +9,7 @@ class SbtaHomePage extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.red),
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
+      home: const Scaffold(
         body:SplashScreen(),//LoginScreen(),
 
       ),

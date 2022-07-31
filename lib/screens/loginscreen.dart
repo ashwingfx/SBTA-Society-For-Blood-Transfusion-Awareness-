@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sbtanew/assets.dart';
+import 'package:sbtanew/screens/dashboard.dart';
 import 'package:sbtanew/screens/registration.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/constants.dart';
 import '../widgets/buttons.dart';
 
@@ -21,6 +23,8 @@ class LoginScreenState extends State {
 
 
   final _formKey = GlobalKey<FormState>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +135,7 @@ class LoginScreenState extends State {
                                    userName = userNameController.text;
                                    passWord = passWordController.text;
                                   });
-
+                                 userLogin();
                               }
                             }, btnString: "Login"),
                             verticaSeperation,
@@ -167,5 +171,28 @@ class LoginScreenState extends State {
         ),
       ),
     );
+  }
+
+  Future<void> userLogin()async{
+    try{
+      await _auth.signInWithEmailAndPassword(
+          email:userNameController.text,
+          password: passWordController.text);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login Success")));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>DashboardSbta()));
+
+    }on FirebaseAuthException catch (e){
+      if(e.code== 'user-not-found'){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("No registered user found")));
+      }
+
+    }
+
+  }
+  void checkLogin()async{
+    if(userNameController.text==passWordController.text){
+
+
+    }
   }
 }

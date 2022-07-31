@@ -22,19 +22,20 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       width: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        color: Colors.white,
+       /* gradient: LinearGradient(
           begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors:[
-              Color(0xe7ffffff),
-              Color(0xe7ffffff),
+              Color(0xe7e7e7e7),
+              Color(0xe7e7e7e7),
             ]
-        ),
+        ),*/
       ),
       child: Center(
         child: Container(
-          width: 250,
-          height: 250,
+          width: 200,
+          height: 200,
           child:Lottie.asset(lotta),
         ),
       ),
