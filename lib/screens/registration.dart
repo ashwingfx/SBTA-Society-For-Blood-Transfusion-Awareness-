@@ -204,11 +204,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   verticaSeperation,
                                   Buttons(btnFunction: () {
                                     if(_formKey.currentState!.validate()){
-                                      setState(() {
+                                /*      setState(() {
                                         emailAddress = emailController.text;
                                         mobileNumber = int.parse(mobileController.text);
                                         password = passwordController.text;
-                                      });
+                                      });*/
                                       registraion();
                                     }
                                   }, btnString: "Register"),

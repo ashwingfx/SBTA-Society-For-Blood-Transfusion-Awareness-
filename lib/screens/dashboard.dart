@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sbtanew/screens/loginscreen.dart';
 import 'package:sbtanew/widgets/buttons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class DashboardSbta extends StatelessWidget {
   const DashboardSbta({Key? key}) : super(key: key);
 
@@ -14,9 +15,9 @@ class DashboardSbta extends StatelessWidget {
         ),
         title: Text("Dashboard"),
         actions: [
-          IconButton(onPressed: () async{
-            await FirebaseAuth.instance.signOut();
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>LoginScreen()), (route) => false);
+          IconButton(onPressed: () {
+            signOut(context);
+
           }, icon: Icon(Icons.logout)
           ),
         ],
@@ -27,5 +28,12 @@ class DashboardSbta extends StatelessWidget {
         ),
       ),
     );
+  }
+  //SIGNOUT FUNCTION
+  signOut(BuildContext context)async{
+    final sharepref = await SharedPreferences.getInstance();
+    await sharepref.clear();
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>LoginScreen()),(route) => false);
   }
 }

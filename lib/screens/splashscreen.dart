@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sbtanew/main.dart';
+import 'package:sbtanew/screens/dashboard.dart';
 import 'package:sbtanew/screens/loginscreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../assets.dart';
 class SplashScreen extends StatefulWidget {
@@ -13,7 +16,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
 
     void initState() {
-    gotoLogin();
+      checkUserLogin();
     super.initState();
 
   }
@@ -45,4 +48,22 @@ Future <void> gotoLogin()async{
    await Future.delayed(Duration(seconds: 5),() {});
    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> LoginScreen()));
 }
+
+Future<void>checkUserLogin()async{
+      final _pref = await SharedPreferences.getInstance();
+      final userLogedin = _pref.getBool(SAVE_KEY);
+      if(userLogedin ==null || userLogedin == false ){
+        gotoLogin();
+      }else{
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> DashboardSbta()));
+      }
+}
+    @override
+    void dipose(){
+      gotoLogin();
+      super.dispose();
+
+    }
+
+
 }

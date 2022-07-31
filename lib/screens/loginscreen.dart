@@ -5,6 +5,7 @@ import 'package:sbtanew/screens/dashboard.dart';
 import 'package:sbtanew/screens/registration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/constants.dart';
+import '../main.dart';
 import '../widgets/buttons.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -130,15 +131,14 @@ class LoginScreenState extends State {
                             ),
                             verticaSeperation,
                             Buttons(btnFunction: () {
-                              if(_formKey.currentState!.validate()){
-                                 setState(() {
-                                   userName = userNameController.text;
-                                   passWord = passWordController.text;
-                                  });
-                                 userLogin();
+                              if(_formKey.currentState!.validate()) {
+                                userLogin(context);
+                                checkLogin(context);
                               }
                             }, btnString: "Login"),
+
                             verticaSeperation,
+
                             TextButton(
                                 onPressed:() {
                                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RegistrationScreen()));
@@ -173,26 +173,30 @@ class LoginScreenState extends State {
     );
   }
 
-  Future<void> userLogin()async{
+    void checkLogin(BuildContext context)async{
+
+      if(userNameController.text == passWordController.text){
+      final _sharePref = await SharedPreferences.getInstance();
+            await _sharePref.setBool(SAVE_KEY, true);
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>DashboardSbta()));
+    }
+  }
+
+  Future<void> userLogin(BuildContext context)async{
     try{
-      await _auth.signInWithEmailAndPassword(
-          email:userNameController.text,
-          password: passWordController.text);
+      await _auth.signInWithEmailAndPassword(email:userNameController.text,password: passWordController.text);
+
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login Success")));
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>DashboardSbta()));
 
     }on FirebaseAuthException catch (e){
       if(e.code== 'user-not-found'){
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("No registered user found")));
+      }else if(e.code=="wrong-password"){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Username or password not match")));
       }
 
     }
 
-  }
-  void checkLogin()async{
-    if(userNameController.text==passWordController.text){
-
-
-    }
   }
 }
