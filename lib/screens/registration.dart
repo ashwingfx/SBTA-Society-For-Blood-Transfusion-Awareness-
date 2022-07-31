@@ -242,8 +242,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         ),
         );
         
-         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>DashboardSbta()
-         ),
+         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen()),
          );
          
   }on FirebaseAuthException catch (e){
