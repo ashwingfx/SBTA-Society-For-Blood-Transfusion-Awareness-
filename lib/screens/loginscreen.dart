@@ -8,24 +8,17 @@ import '../constants/constants.dart';
 import '../main.dart';
 import '../widgets/buttons.dart';
 
-class LoginScreen extends StatefulWidget {
-  @override
-  LoginScreenState createState() => LoginScreenState();
-}
-
-class LoginScreenState extends State {
+class LoginScreen extends StatelessWidget {
   //const LoginScreen({Key? key}) : super(key: key);
 
-  final  userNameController = TextEditingController();
-  final  passWordController = TextEditingController();
+  final userNameController = TextEditingController();
+  final passWordController = TextEditingController();
 
   String? userName;
   var passWord;
 
-
   final _formKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
 
   @override
   Widget build(BuildContext context) {
@@ -39,20 +32,19 @@ class LoginScreenState extends State {
               gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors:[
+                  colors: [
                     Color(0xffff2277),
                     Color(0xffff4d4d),
-                  ]
-              ),
-             /* image: DecorationImage(
+                  ]),
+              /* image: DecorationImage(
                 image: AssetImage(backGround),
                 fit: BoxFit.cover,
                 ),*/
-              ),
+            ),
             child: Stack(
               children: [
                 Positioned(
-                  bottom: -2,
+                    bottom: -2,
                     right: -1,
                     child: Container(
                       height: 245,
@@ -63,140 +55,148 @@ class LoginScreenState extends State {
                           fit: BoxFit.fill,
                         ),
                       ),
-                    )
-                ),
+                    )),
                 Positioned(
                   top: 150,
-                    left:0,
-                     right: 0,
-                    child: Container(
-                      padding: EdgeInsets.only(left: 50,right: 50),
-                      child: Form(
-                        key:_formKey,
-                        child: Column(
-                          children: [
-                            TextFormField(
-                              controller: userNameController,
-                              validator: (value){
-                                if(value==null || value.isEmpty){
-                                  return "Enter username";
-                                }
-                                  return null;
-
-                              },
-                              keyboardType: TextInputType.text,
-                              style: TextStyle(color: Colors.white70),
-                              decoration: const InputDecoration(
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    padding: EdgeInsets.only(left: 50, right: 50),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            controller: userNameController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Enter username";
+                              }
+                              return null;
+                            },
+                            keyboardType: TextInputType.text,
+                            style: TextStyle(color: Colors.white70),
+                            decoration: const InputDecoration(
                                 hintText: "Username",
                                 hintStyle: TextStyle(color: Colors.white70),
+                                errorStyle: TextStyle(color: Colors.white70),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.white
-                                  ),
+                                  borderSide: BorderSide(color: Colors.white),
                                 ),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.white70,
                                   ),
-                                )
-                              ),
-                            ),
-                            verticaSeperation,
-                            TextFormField(
-                              controller: passWordController,
-                              validator: (value){
-                                if(value==null || value.length<6){
-                                  return "Enter Password";
-                                }
-                                  return null;
-
-                              },
-                              keyboardType: TextInputType.text,
-                              style: TextStyle(color:Colors.white70),
-                              obscureText: true,
-                              decoration: const InputDecoration(
-                                hintText: "Password",
-                                hintStyle: TextStyle(color: Colors.white70),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.white70,
-                                  ),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            verticaSeperation,
-                            Buttons(btnFunction: () {
-                              if(_formKey.currentState!.validate()) {
-                                userLogin(context);
-                                checkLogin(context);
+                                )),
+                          ),
+                          verticaSeperation,
+                          TextFormField(
+                            controller: passWordController,
+                            validator: (value) {
+                              if (value == null || value.length < 6) {
+                                return "Enter valid Password";
                               }
-                            }, btnString: "Login"),
+                              return null;
+                            },
+                            keyboardType: TextInputType.text,
+                            style: TextStyle(color: Colors.white70),
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                              hintText: "Password",
+                              hintStyle: TextStyle(color: Colors.white70),
+                              errorStyle: TextStyle(color: Colors.white70),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white70,
+                                ),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          verticaSeperation,
+                          Buttons(
+                              btnFunction: () {
+                                if (_formKey.currentState!.validate()) {
 
-                            verticaSeperation,
+                                    userLogin(context);
+                                    //print(userNameController.text);
 
-                            TextButton(
-                                onPressed:() {
-                                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RegistrationScreen()));
-                                }, child: Text("Not registered? SignUp", style: TextStyle(color: Colors.white)))
-                          ],
-                        ),
 
+                                  //checkLogin(context);
+                                }
+                              },
+                              btnString: "Login"),
+                          verticaSeperation,
+                          TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        RegistrationScreen()));
+                              },
+                              child: Text("Not registered? SignUp",
+                                  style: TextStyle(color: Colors.white)))
+                        ],
                       ),
-
                     ),
+                  ),
                 ),
-
                 Positioned(
-                  bottom: 20,
+                    bottom: 20,
                     left: 0,
                     right: 0,
                     child: Container(
                       height: 130,
                       width: 130,
                       decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(logo),
-                        )
-                      ),
-                    )
-                )
+                          image: DecorationImage(
+                        image: AssetImage(logo),
+                      )),
+                    ))
               ],
             ),
-            ),
+          ),
         ),
       ),
     );
   }
 
-    void checkLogin(BuildContext context)async{
-
-      if(userNameController.text == passWordController.text){
-      final _sharePref = await SharedPreferences.getInstance();
+/*    void checkLogin(BuildContext context)async{
+            final _sharePref = await SharedPreferences.getInstance();
             await _sharePref.setBool(SAVE_KEY, true);
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>DashboardSbta()));
-    }
-  }
+            //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>DashboardSbta()));
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>DashboardSbta()),(route) => false);
 
-  Future<void> userLogin(BuildContext context)async{
-    try{
-      await _auth.signInWithEmailAndPassword(email:userNameController.text,password: passWordController.text);
+  }*/
 
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login Success")));
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>DashboardSbta()));
+  Future<void> userLogin(BuildContext context) async {
+    try {
+      await _auth.signInWithEmailAndPassword(
+          email: userNameController.text, password: passWordController.text);
 
-    }on FirebaseAuthException catch (e){
-      if(e.code== 'user-not-found'){
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("No registered user found")));
-      }else if(e.code=="wrong-password"){
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Username or password not match")));
+      final _sharePref = await SharedPreferences.getInstance();
+      await _sharePref.setBool(SAVE_KEY, true);
+
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Login Success")));
+
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => DashboardSbta()),
+          (route) => false);
+      //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>DashboardSbta()));
+
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("No registered user found")));
+      } else if (e.code == "wrong-password") {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Username or password not match")));
       }
-
     }
-
   }
 }

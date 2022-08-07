@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       width: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.redAccent,
        /* gradient: LinearGradient(
           begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -45,14 +45,15 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 Future <void> gotoLogin()async{
-   await Future.delayed(Duration(seconds: 5),() {});
+   await Future.delayed(Duration(seconds: 10),() {});
    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> LoginScreen()));
 }
 
 Future<void>checkUserLogin()async{
       final _pref = await SharedPreferences.getInstance();
       final userLogedin = _pref.getBool(SAVE_KEY);
-      if(userLogedin ==null || userLogedin == false ){
+
+      if(userLogedin == null || userLogedin == false ){
         gotoLogin();
       }else{
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> DashboardSbta()));
