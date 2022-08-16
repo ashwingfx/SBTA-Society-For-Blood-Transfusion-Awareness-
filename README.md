@@ -1,5 +1,7 @@
 # sbtanew
 
+![sc1](https://user-images.githubusercontent.com/52097871/184971272-3c670bcc-6dbb-4da0-b0a4-fa6fbc96469e.jpg)
+
 A new Flutter project.
 
 ## Getting Started

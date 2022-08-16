@@ -247,7 +247,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           //duration: const Duration(seconds: 10),
           content: Text(
             "Registration Success Please Login",
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.white),
           ),
         ),
       );
