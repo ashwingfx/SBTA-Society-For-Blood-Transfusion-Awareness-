@@ -1,9 +1,11 @@
 # sbtanew
 
+## Login Page and Register Page.
+
 ![sc1](https://user-images.githubusercontent.com/52097871/184971272-3c670bcc-6dbb-4da0-b0a4-fa6fbc96469e.jpg)
 ![sc2](https://user-images.githubusercontent.com/52097871/184971972-5856b6ba-25c9-4271-818f-0a803bf3010a.jpg)
 
-Login Page and Register Page.
+
 
 ## Getting Started
 
